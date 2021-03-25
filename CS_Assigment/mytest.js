@@ -78,7 +78,8 @@ describe('Open google map location', () => {
     const originalWindow = await driver.getWindowHandle();
    //click on one of the location
    var locationIndex= Math.floor(Math.random() * 7)+ 1// choose a number betwen 1 - 7
-   await (await driver.findElement(By.xpath("(//*[contains(@class, 'footer__locations-list')]/li/a)["+locationIndex+"]"))).click()
+    let elem = await driver.findElement(By.xpath("(//*[contains(@class, 'footer__locations-list')]/li/a)["+locationIndex+"]"))
+   await driver.wait(until.elementIsEnabled(elem),5000).click();
    await driver.wait(
        async () => (await driver.getAllWindowHandles()).length === 2,
        10000
